@@ -1,5 +1,6 @@
 package com.punksta.openactoinbar;
 
+import android.animation.Animator;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +49,6 @@ public class MainActivity extends AppCompatActivity implements Action.OnActionCl
 
     @Override
     public void onClick(View view, Action action) {
-        view.setVisibility(View.GONE);
+        view.animate().rotationYBy(900).setDuration(5000).start();
     }
 }
