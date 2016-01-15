@@ -22,5 +22,5 @@ public interface IActionBar {
 
     void setGravity(Styles.Gravity gravity);
     void setViewType(Styles.ViewType viewType);
-    void setActions(List<? extends ActionBarButton> button, boolean sameColorWithTitle);
+    void setActions(List<? extends Action> button, boolean sameColorWithTitle);
 }

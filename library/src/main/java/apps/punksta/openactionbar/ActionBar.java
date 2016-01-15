@@ -7,9 +7,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,10 +28,12 @@ public class ActionBar extends RelativeLayout implements
     private final ImageView appIcon;
     private final LinearLayout actionsLayout;
     private final LinearLayout titleLayout;
-    private final List<ImageView> actions;
+    private final List<View> actions;
 
     private Styles.Gravity gravity;
     private Styles.ViewType viewType;
+    private Action.OnActionClickListener listener;
+
 
     {
         actions = new ArrayList<>();
@@ -214,25 +214,27 @@ public class ActionBar extends RelativeLayout implements
     }
 
     @Override
-    public void setActions(List<? extends ActionBarButton> buttons, boolean sameColorWithTitle) {
+    public void setActions(List<? extends Action> buttons, boolean sameColorWithTitle) {
         this.actions.clear();
         this.actionsLayout.removeAllViews();
-        int color = title.getCurrentTextColor();
-        PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP);
-
-        for (ActionBarButton barButton : buttons) {
-            ImageView imageView = new ImageView(getContext());
-            imageView.setId(barButton.getId());
-            imageView.setImageDrawable(barButton.getDrawable());
-            imageView.setOnClickListener(this);
-//            if (sameColorWithTitle)
-//                imageView.setColorFilter(colorFilter);
-            actionsLayout.addView(imageView, new ViewGroup.LayoutParams(pxFromDp(getContext(), 24), pxFromDp( getContext(), 24)));
+        List<View> result = ActionBuilder.fillLayout(getContext(), buttons, actionsLayout);
+        actions.addAll(result);
+        for (View v: result) {
+            v.setOnClickListener(this);
+            actionsLayout.addView(v);
         }
     }
 
     @Override
     public void onClick(View v) {
         Toast.makeText(getContext(), "onClick"+v.getId(), Toast.LENGTH_LONG).show();
+        Action action = (Action) v.getTag();
+        if (listener != null && action != null) {
+            listener.onClick(v, action);
+        }
+    }
+
+    public void setListener(Action.OnActionClickListener listener) {
+        this.listener = listener;
     }
 }
