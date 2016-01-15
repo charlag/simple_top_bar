@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/actionBarSize"
-    android:background="@android:color/holo_blue_dark"
-    android:paddingEnd="@dimen/horizontal_margin"
-    android:paddingStart="@dimen/horizontal_margin"
     >
 
     <ImageView
@@ -55,7 +52,11 @@
         android:layout_width="wrap_content"
         android:layout_height="?android:attr/actionBarSize"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/horizontal_margin"
-        android:gravity="center"/>
+        android:gravity="center">
+        <View
+            android:background="@android:color/white"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+    </LinearLayout>
 
-</merge>
+</RelativeLayout>

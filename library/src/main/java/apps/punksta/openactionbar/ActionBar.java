@@ -2,30 +2,42 @@ package apps.punksta.openactionbar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.FrameLayout;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by punksta on 13.01.16.
  */
-public class ActionBar extends RelativeLayout implements IActionBar {
+public class ActionBar extends RelativeLayout implements
+        IActionBar,
+        View.OnClickListener {
     private final ImageView menu;
     private final TextView title;
     private final ImageView appIcon;
-    private final LinearLayout actions;
+    private final LinearLayout actionsLayout;
     private final LinearLayout titleLayout;
+    private final List<ImageView> actions;
+
     private Styles.Gravity gravity;
     private Styles.ViewType viewType;
 
+    {
+        actions = new ArrayList<>();
+    }
 
     private void parseAtr(AttributeSet set, int defStyleAttr) {
         TypedArray a = getContext().getTheme().obtainStyledAttributes(
@@ -38,7 +50,7 @@ public class ActionBar extends RelativeLayout implements IActionBar {
             int gravityNum = a.getInteger(R.styleable.ActionBar_title_gravity, 0);
 
             Styles.ViewType viewType = Styles.ViewType.values()[viewNum];
-            Styles.Gravity gravity =  Styles.Gravity.values()[gravityNum];
+            Styles.Gravity gravity = Styles.Gravity.values()[gravityNum];
 
             setGravity(gravity);
             setViewType(viewType);
@@ -64,7 +76,7 @@ public class ActionBar extends RelativeLayout implements IActionBar {
 
     @Override
     public LinearLayout getActionLayout() {
-        return actions;
+        return actionsLayout;
     }
 
     @Override
@@ -138,6 +150,7 @@ public class ActionBar extends RelativeLayout implements IActionBar {
         updateMargins();
     }
 
+
     @Override
     public void setTitleColor(int color) {
         title.setTextColor(color);
@@ -156,7 +169,7 @@ public class ActionBar extends RelativeLayout implements IActionBar {
         menu = (ImageView) findViewById(R.id.action_bar_menu);
         title = (TextView) findViewById(R.id.action_bar_title);
         appIcon = (ImageView) findViewById(R.id.action_bar_app_icon);
-        actions = (LinearLayout) findViewById(R.id.action_bar_actions);
+        actionsLayout = (LinearLayout) findViewById(R.id.action_bar_actions);
         titleLayout = (LinearLayout) findViewById(R.id.action_bar_title_layout);
     }
 
@@ -165,7 +178,7 @@ public class ActionBar extends RelativeLayout implements IActionBar {
         init();
         menu = (ImageView) findViewById(R.id.action_bar_menu);
         title = (TextView) findViewById(R.id.action_bar_title);
-        actions = (LinearLayout) findViewById(R.id.action_bar_actions);
+        actionsLayout = (LinearLayout) findViewById(R.id.action_bar_actions);
         appIcon = (ImageView) findViewById(R.id.action_bar_app_icon);
         titleLayout = (LinearLayout) findViewById(R.id.action_bar_title_layout);
 
@@ -177,7 +190,7 @@ public class ActionBar extends RelativeLayout implements IActionBar {
         init();
         menu = (ImageView) findViewById(R.id.action_bar_menu);
         title = (TextView) findViewById(R.id.action_bar_title);
-        actions = (LinearLayout) findViewById(R.id.action_bar_actions);
+        actionsLayout = (LinearLayout) findViewById(R.id.action_bar_actions);
         appIcon = (ImageView) findViewById(R.id.action_bar_app_icon);
         titleLayout = (LinearLayout) findViewById(R.id.action_bar_title_layout);
 
@@ -196,7 +209,30 @@ public class ActionBar extends RelativeLayout implements IActionBar {
         }
     }
 
-    public static float pxFromDp(final Context context, final float dp) {
-        return dp * context.getResources().getDisplayMetrics().density;
+    public static int pxFromDp(final Context context, final float dp) {
+        return (int) (dp * context.getResources().getDisplayMetrics().density);
+    }
+
+    @Override
+    public void setActions(List<? extends ActionBarButton> buttons, boolean sameColorWithTitle) {
+        this.actions.clear();
+        this.actionsLayout.removeAllViews();
+        int color = title.getCurrentTextColor();
+        PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+
+        for (ActionBarButton barButton : buttons) {
+            ImageView imageView = new ImageView(getContext());
+            imageView.setId(barButton.getId());
+            imageView.setImageDrawable(barButton.getDrawable());
+            imageView.setOnClickListener(this);
+//            if (sameColorWithTitle)
+//                imageView.setColorFilter(colorFilter);
+            actionsLayout.addView(imageView, new ViewGroup.LayoutParams(pxFromDp(getContext(), 24), pxFromDp( getContext(), 24)));
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        Toast.makeText(getContext(), "onClick"+v.getId(), Toast.LENGTH_LONG).show();
     }
 }
