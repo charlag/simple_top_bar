@@ -14,11 +14,10 @@ public interface IActionBar {
     TextView getTitle();
     LinearLayout getActionLayout();
 
-    void setGravity(Styles.Gravity gravity);
-    void setViewType(Styles.ViewType viewType);
 
     void setTitleColor(int color);
     void setBackgroundColor(int color);
 
-
+    void setGravity(Styles.Gravity gravity);
+    void setViewType(Styles.ViewType viewType);
 }

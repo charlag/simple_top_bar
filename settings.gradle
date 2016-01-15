@@ -1,1 +1,1 @@
-include ':example', ':openactionbar'
+include ':example', ':library'
