@@ -34,9 +34,11 @@ public class ActionBar extends RelativeLayout implements
     private Styles.ViewType viewType;
     private Action.OnActionClickListener listener;
 
+    private boolean paintDrawableActionsToTitleColor;
 
     {
         actions = new ArrayList<>();
+        paintDrawableActionsToTitleColor = true;
     }
 
     private void parseAtr(AttributeSet set, int defStyleAttr) {
@@ -156,6 +158,16 @@ public class ActionBar extends RelativeLayout implements
         title.setTextColor(color);
         PorterDuffColorFilter colorFilter = new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP);
         menu.setColorFilter(colorFilter);
+        if (paintDrawableActionsToTitleColor)
+            paintActions(color);
+    }
+
+    private void paintActions(int color) {
+        for (View view: actions) {
+            if (view.getTag() instanceof DrawableActon) {
+                ((ImageView)view).getDrawable().mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+            }
+        }
     }
 
     @Override
@@ -223,6 +235,7 @@ public class ActionBar extends RelativeLayout implements
             v.setOnClickListener(this);
             actionsLayout.addView(v);
         }
+        paintActions(title.getCurrentTextColor());
     }
 
     @Override
@@ -236,5 +249,13 @@ public class ActionBar extends RelativeLayout implements
 
     public void setListener(Action.OnActionClickListener listener) {
         this.listener = listener;
+    }
+
+    public boolean isPaintDrawableActionsToTitleColor() {
+        return paintDrawableActionsToTitleColor;
+    }
+
+    public void setPaintDrawableActionsToTitleColor(boolean paintDrawableActionsToTitleColor) {
+        this.paintDrawableActionsToTitleColor = paintDrawableActionsToTitleColor;
     }
 }

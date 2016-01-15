@@ -46,7 +46,7 @@ class ActionBuilder {
 
     private static View fromDrawable(DrawableActon action, Context context) {
         ImageView imageView = new ImageView(context);
-        imageView.setImageDrawable(action.getDrawable());
+        imageView.setImageResource(action.getDrawable());
         return imageView;
     }
 

@@ -25,11 +25,10 @@ public class MainActivity extends AppCompatActivity implements Action.OnActionCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Random rnd = new Random();
-        Drawable drawable = getResources().getDrawable(android.R.drawable.star_on);
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.conteiner);
 
-        List<Action> actionList = Arrays.asList(new DrawableActon(1, drawable, "1"),
+        List<Action> actionList = Arrays.asList(new DrawableActon(1, R.drawable.ic_menu_black_24dp, "1"),
                 new CustomViewAction(2, "2", R.layout.sample_view));
 
         for (Styles.Gravity gravity: Styles.Gravity.values())
@@ -40,8 +39,8 @@ public class MainActivity extends AppCompatActivity implements Action.OnActionCl
                 int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 int titleColor = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 actionBar.setBackgroundColor(color);
-                actionBar.setTitleColor(titleColor);
                 actionBar.setActions(actionList, true);
+                actionBar.setTitleColor(titleColor);
                 actionBar.setListener(this);
                 layout.addView(actionBar);
             }
@@ -49,6 +48,6 @@ public class MainActivity extends AppCompatActivity implements Action.OnActionCl
 
     @Override
     public void onClick(View view, Action action) {
-        view.animate().rotationYBy(900).setDuration(5000).start();
+        view.animate().rotationYBy(900).rotationXBy(900).setDuration(5000).start();
     }
 }
