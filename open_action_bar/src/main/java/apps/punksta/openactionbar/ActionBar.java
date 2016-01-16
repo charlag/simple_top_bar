@@ -239,6 +239,15 @@ public class ActionBar extends RelativeLayout implements
     }
 
     @Override
+    public View getView(Action action) {
+       for (View view : actions) {
+           if (view.getTag().equals(action))
+               return view;
+       }
+        throw new IllegalArgumentException(action + " is not added to actions");
+    }
+
+    @Override
     public void onClick(View v) {
         Toast.makeText(getContext(), "onClick"+v.getId(), Toast.LENGTH_LONG).show();
         Action action = (Action) v.getTag();

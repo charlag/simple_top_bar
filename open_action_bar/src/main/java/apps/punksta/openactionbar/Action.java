@@ -26,4 +26,31 @@ public abstract class Action {
     public interface OnActionClickListener {
         void onClick(View view, Action action);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Action action = (Action) o;
+
+        if (id != action.id) return false;
+        return name.equals(action.name);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + name.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Action{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

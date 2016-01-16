@@ -1,5 +1,6 @@
 package apps.punksta.openactionbar;
 
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,4 +24,6 @@ public interface IActionBar {
     void setGravity(Styles.Gravity gravity);
     void setViewType(Styles.ViewType viewType);
     void setActions(List<? extends Action> button, boolean sameColorWithTitle);
+
+    View getView(Action action);
 }
