@@ -2,14 +2,14 @@ apply plugin: 'com.android.library'
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'library'
+    bintrayName = 'open_action_bar'
     publishedGroupId = 'apps.punksta.openactionbar'
     libraryName = 'OpenActionBar'
-    artifact = 'OpenActionBar'
+    artifact = 'open_action_bar'
 
     libraryDescription = 'alternative actionbar'
 
-    libraryVersion = '0.11'
+    libraryVersion = '0.12'
 
     siteUrl = 'https://github.com/punksta/OpenActionBar'
     gitUrl = 'https://github.com/punksta/OpenActionBar.git'
