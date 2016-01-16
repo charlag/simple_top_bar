@@ -44,12 +44,12 @@ public class ActionBar extends RelativeLayout implements
     private void parseAtr(AttributeSet set, int defStyleAttr) {
         TypedArray a = getContext().getTheme().obtainStyledAttributes(
                 set,
-                R.styleable.ActionBar,
+                apps.punksta.openactionbar.R.styleable.ActionBar,
                 defStyleAttr,
                 0);
         try {
-            int viewNum = a.getInteger(R.styleable.ActionBar_ui_mode, 2);
-            int gravityNum = a.getInteger(R.styleable.ActionBar_title_gravity, 0);
+            int viewNum = a.getInteger(apps.punksta.openactionbar.R.styleable.ActionBar_ui_mode, 2);
+            int gravityNum = a.getInteger(apps.punksta.openactionbar.R.styleable.ActionBar_title_gravity, 0);
 
             Styles.ViewType viewType = Styles.ViewType.values()[viewNum];
             Styles.Gravity gravity = Styles.Gravity.values()[gravityNum];
@@ -86,7 +86,7 @@ public class ActionBar extends RelativeLayout implements
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) titleLayout.getLayoutParams();
         switch (gravity) {
             case left:
-                params.addRule(RelativeLayout.END_OF, R.id.action_bar_menu);
+                params.addRule(RelativeLayout.END_OF, apps.punksta.openactionbar.R.id.action_bar_menu);
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL, 0);
                 break;
             case center:
@@ -102,7 +102,7 @@ public class ActionBar extends RelativeLayout implements
         if (gravity == null)
             return;
         LinearLayout.LayoutParams imageParams = (LinearLayout.LayoutParams) appIcon.getLayoutParams();
-        int margin = (int) getContext().getResources().getDimension(R.dimen.horizontal_margin);
+        int margin = (int) getContext().getResources().getDimension(apps.punksta.openactionbar.R.dimen.horizontal_margin);
         switch (gravity) {
             case left:
                 imageParams.setMarginEnd(margin);
@@ -178,21 +178,21 @@ public class ActionBar extends RelativeLayout implements
     public ActionBar(Context context) {
         super(context);
         init();
-        menu = (ImageView) findViewById(R.id.action_bar_menu);
-        title = (TextView) findViewById(R.id.action_bar_title);
-        appIcon = (ImageView) findViewById(R.id.action_bar_app_icon);
-        actionsLayout = (LinearLayout) findViewById(R.id.action_bar_actions);
-        titleLayout = (LinearLayout) findViewById(R.id.action_bar_title_layout);
+        menu = (ImageView) findViewById(apps.punksta.openactionbar.R.id.action_bar_menu);
+        title = (TextView) findViewById(apps.punksta.openactionbar.R.id.action_bar_title);
+        appIcon = (ImageView) findViewById(apps.punksta.openactionbar.R.id.action_bar_app_icon);
+        actionsLayout = (LinearLayout) findViewById(apps.punksta.openactionbar.R.id.action_bar_actions);
+        titleLayout = (LinearLayout) findViewById(apps.punksta.openactionbar.R.id.action_bar_title_layout);
     }
 
     public ActionBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
-        menu = (ImageView) findViewById(R.id.action_bar_menu);
-        title = (TextView) findViewById(R.id.action_bar_title);
-        actionsLayout = (LinearLayout) findViewById(R.id.action_bar_actions);
-        appIcon = (ImageView) findViewById(R.id.action_bar_app_icon);
-        titleLayout = (LinearLayout) findViewById(R.id.action_bar_title_layout);
+        menu = (ImageView) findViewById(apps.punksta.openactionbar.R.id.action_bar_menu);
+        title = (TextView) findViewById(apps.punksta.openactionbar.R.id.action_bar_title);
+        actionsLayout = (LinearLayout) findViewById(apps.punksta.openactionbar.R.id.action_bar_actions);
+        appIcon = (ImageView) findViewById(apps.punksta.openactionbar.R.id.action_bar_app_icon);
+        titleLayout = (LinearLayout) findViewById(apps.punksta.openactionbar.R.id.action_bar_title_layout);
 
         parseAtr(attrs, 0);
     }
@@ -200,20 +200,20 @@ public class ActionBar extends RelativeLayout implements
     public ActionBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
-        menu = (ImageView) findViewById(R.id.action_bar_menu);
-        title = (TextView) findViewById(R.id.action_bar_title);
-        actionsLayout = (LinearLayout) findViewById(R.id.action_bar_actions);
-        appIcon = (ImageView) findViewById(R.id.action_bar_app_icon);
-        titleLayout = (LinearLayout) findViewById(R.id.action_bar_title_layout);
+        menu = (ImageView) findViewById(apps.punksta.openactionbar.R.id.action_bar_menu);
+        title = (TextView) findViewById(apps.punksta.openactionbar.R.id.action_bar_title);
+        actionsLayout = (LinearLayout) findViewById(apps.punksta.openactionbar.R.id.action_bar_actions);
+        appIcon = (ImageView) findViewById(apps.punksta.openactionbar.R.id.action_bar_app_icon);
+        titleLayout = (LinearLayout) findViewById(apps.punksta.openactionbar.R.id.action_bar_title_layout);
 
         parseAtr(attrs, defStyleAttr);
     }
 
     private void init() {
-        int margin = (int) getContext().getResources().getDimension(R.dimen.horizontal_margin);
+        int margin = (int) getContext().getResources().getDimension(apps.punksta.openactionbar.R.dimen.horizontal_margin);
         setPadding(margin, 0, margin, 0);
 
-        LayoutInflater.from(getContext()).inflate(R.layout.action_bar, this, true);
+        LayoutInflater.from(getContext()).inflate(apps.punksta.openactionbar.R.layout.action_bar, this, true);
         float elevation = pxFromDp(getContext(), 4);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

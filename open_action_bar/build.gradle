@@ -9,7 +9,7 @@ ext {
 
     libraryDescription = 'alternative actionbar'
 
-    libraryVersion = '0.13'
+    libraryVersion = '0.141'
 
     siteUrl = 'https://github.com/punksta/OpenActionBar'
     gitUrl = 'https://github.com/punksta/OpenActionBar.git'
@@ -22,7 +22,6 @@ ext {
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]
 }
-
 
 android {
     compileSdkVersion 23

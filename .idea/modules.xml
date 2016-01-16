@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SimpleActionBar.iml" filepath="$PROJECT_DIR$/SimpleActionBar.iml" />
-      <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
       <module fileurl="file://$PROJECT_DIR$/open_action_bar/open_action_bar.iml" filepath="$PROJECT_DIR$/open_action_bar/open_action_bar.iml" />
     </modules>
   </component>
