@@ -39,7 +39,6 @@ class ActionBuilder {
     }
 
 
-
     private static View fromCustom(CustomViewAction action, Context context,  ViewGroup group) {
         return LayoutInflater.from(context).inflate(action.getViewRes(), group, false);
     }
@@ -47,6 +46,8 @@ class ActionBuilder {
     private static View fromDrawable(DrawableActon action, Context context) {
         ImageView imageView = new ImageView(context);
         imageView.setImageResource(action.getDrawable());
+        int dp24 = (int) context.getResources().getDimension(R.dimen.drawable_icon_height);
+        imageView.setLayoutParams(new ViewGroup.LayoutParams(dp24, dp24));
         return imageView;
     }
 

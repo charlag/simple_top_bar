@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -165,7 +166,9 @@ public class ActionBar extends RelativeLayout implements
     private void paintActions(int color) {
         for (View view: actions) {
             if (view.getTag() instanceof DrawableActon) {
-                ((ImageView)view).getDrawable().mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+                Drawable d = ((ImageView)view).getDrawable();
+                if (d != null)
+                    d.mutate().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
             }
         }
     }
@@ -213,7 +216,7 @@ public class ActionBar extends RelativeLayout implements
         int margin = (int) getContext().getResources().getDimension(apps.punksta.openactionbar.R.dimen.horizontal_margin);
         setPadding(margin, 0, margin, 0);
 
-        LayoutInflater.from(getContext()).inflate(apps.punksta.openactionbar.R.layout.action_bar, this, true);
+        LayoutInflater.from(getContext()).inflate(apps.punksta.openactionbar.R.layout.action_bar_layout, this, true);
         float elevation = pxFromDp(getContext(), 4);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -235,7 +238,8 @@ public class ActionBar extends RelativeLayout implements
             v.setOnClickListener(this);
             actionsLayout.addView(v);
         }
-        paintActions(title.getCurrentTextColor());
+        if (sameColorWithTitle)
+            paintActions(title.getCurrentTextColor());
     }
 
     @Override

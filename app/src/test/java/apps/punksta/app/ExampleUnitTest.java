@@ -1,4 +1,4 @@
-package apps.punksta.openactionbar;
+package apps.punksta.app;
 
 import org.junit.Test;
 
