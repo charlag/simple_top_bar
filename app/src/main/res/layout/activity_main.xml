@@ -7,6 +7,13 @@
     android:fitsSystemWindows="true"
     tools:context="apps.punksta.app.MainActivity">
 
+    <View
+        android:id="@+id/action_bar_center"
+        android:layout_width="1dp"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/black"
+        />
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,16 +25,10 @@
             android:layout_height="?attr/actionBarSize"
          />
 
+
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
 
 </android.support.design.widget.CoordinatorLayout>
