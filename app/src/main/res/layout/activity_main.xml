@@ -7,25 +7,28 @@
     android:fitsSystemWindows="true"
     tools:context="apps.punksta.app.MainActivity">
 
-    <View
-        android:id="@+id/action_bar_center"
-        android:layout_width="1dp"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/black"
-        />
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <apps.punksta.openactionbar.ActionBar
-            android:id="@+id/toolbar"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-         />
-
-
+            android:layout_height="wrap_content">
+                <apps.punksta.openactionbar.ActionBar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                />
+            <View
+                android:id="@+id/action_bar_center"
+                android:layout_width="1dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="center_horizontal"
+                android:background="@android:color/black"
+                />
+        </FrameLayout>
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main" />

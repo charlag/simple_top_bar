@@ -18,7 +18,16 @@ class ActionBuilder {
         List<View> result = new ArrayList<>(buttons.size());
         for (final Action barButton : buttons) {
             View v = fromAbstract(barButton, context, group);
+            ViewGroup.MarginLayoutParams params;
+            if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams)
+                params = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+            else
+                params = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            int marginStart = (int) context.getResources().getDimension(R.dimen.action_margin_start);
+
+            params.setMarginStart(marginStart);
             result.add(v);
+            group.addView(v, params);
         }
         return result;
     }
@@ -47,7 +56,11 @@ class ActionBuilder {
         ImageView imageView = new ImageView(context);
         imageView.setImageResource(action.getDrawable());
         int dp24 = (int) context.getResources().getDimension(R.dimen.drawable_icon_height);
-        imageView.setLayoutParams(new ViewGroup.LayoutParams(dp24, dp24));
+        int marginStart = (int) context.getResources().getDimension(R.dimen.action_margin_start);
+
+        ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(dp24, dp24);
+        params.setMarginStart(marginStart);
+        imageView.setLayoutParams(params);
         return imageView;
     }
 

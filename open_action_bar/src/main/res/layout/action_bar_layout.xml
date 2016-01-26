@@ -53,10 +53,7 @@
         android:layout_height="?android:attr/actionBarSize"
         android:layout_alignParentEnd="true"
         android:gravity="center">
-        <View
-            android:background="@android:color/white"
-            android:layout_width="24dp"
-            android:layout_height="24dp"/>
+
     </LinearLayout>
 
 </RelativeLayout>

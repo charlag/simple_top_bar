@@ -9,6 +9,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -84,17 +85,20 @@ public class ActionBar extends RelativeLayout implements
 
     @Override
     public void setGravity(Styles.Gravity gravity) {
-        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) titleLayout.getLayoutParams();
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
         switch (gravity) {
             case left:
                 params.addRule(RelativeLayout.END_OF, apps.punksta.openactionbar.R.id.action_bar_menu);
-                params.addRule(RelativeLayout.CENTER_HORIZONTAL, 0);
+                params.removeRule(RelativeLayout.CENTER_HORIZONTAL);
                 break;
             case center:
-                params.addRule(RelativeLayout.END_OF, 0);
+                params.removeRule(RelativeLayout.END_OF);
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
                 break;
         }
+
+        titleLayout.setLayoutParams(params);
         this.gravity = gravity;
         updateMargins();
     }
@@ -114,6 +118,7 @@ public class ActionBar extends RelativeLayout implements
                 else
                     imageParams.setMarginEnd(margin);
         }
+        appIcon.setLayoutParams(imageParams);
     }
 
     public void setViewType(Styles.ViewType viewType) {
@@ -236,7 +241,6 @@ public class ActionBar extends RelativeLayout implements
         actions.addAll(result);
         for (View v: result) {
             v.setOnClickListener(this);
-            actionsLayout.addView(v);
         }
         if (sameColorWithTitle)
             paintActions(title.getCurrentTextColor());
