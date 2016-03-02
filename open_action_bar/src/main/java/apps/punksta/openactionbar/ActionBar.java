@@ -35,7 +35,7 @@ public class ActionBar extends RelativeLayout implements
     private Styles.Gravity gravity;
     private Styles.ViewType viewType;
     private Action.OnActionClickListener listener;
-
+    private int horisontalMargin;
     private boolean paintDrawableActionsToTitleColor;
 
     {
@@ -86,7 +86,6 @@ public class ActionBar extends RelativeLayout implements
     @Override
     public void setGravity(Styles.Gravity gravity) {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
         switch (gravity) {
             case left:
                 params.addRule(RelativeLayout.END_OF, apps.punksta.openactionbar.R.id.action_bar_menu);
@@ -97,7 +96,6 @@ public class ActionBar extends RelativeLayout implements
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
                 break;
         }
-
         titleLayout.setLayoutParams(params);
         this.gravity = gravity;
         updateMargins();
@@ -107,10 +105,16 @@ public class ActionBar extends RelativeLayout implements
         if (gravity == null)
             return;
         LinearLayout.LayoutParams imageParams = (LinearLayout.LayoutParams) appIcon.getLayoutParams();
+        RelativeLayout.LayoutParams params = (LayoutParams) titleLayout.getLayoutParams();
+        params.leftMargin = 0;
+
         int margin = (int) getContext().getResources().getDimension(apps.punksta.openactionbar.R.dimen.horizontal_margin);
         switch (gravity) {
             case left:
                 imageParams.setMarginEnd(margin);
+                if (menu.getVisibility() == GONE) {
+                    params.leftMargin = horisontalMargin;
+                }
                 break;
             case center:
                 if (title.getVisibility() == GONE)
@@ -119,6 +123,7 @@ public class ActionBar extends RelativeLayout implements
                     imageParams.setMarginEnd(margin);
         }
         appIcon.setLayoutParams(imageParams);
+        titleLayout.setLayoutParams(params);
     }
 
     public void setViewType(Styles.ViewType viewType) {
@@ -218,13 +223,13 @@ public class ActionBar extends RelativeLayout implements
     }
 
     private void init() {
-        int margin = (int) getContext().getResources().getDimension(apps.punksta.openactionbar.R.dimen.horizontal_margin);
-        setPadding(margin, 0, margin, 0);
-
+//        int margin = (int) getContext().getResources().getDimension(apps.punksta.openactionbar.R.dimen.horizontal_margin);
+//        setPadding(margin, 0, margin, 0);
+        horisontalMargin = (int) getContext().getResources().getDimension(apps.punksta.openactionbar.R.dimen.horizontal_margin);
         LayoutInflater.from(getContext()).inflate(apps.punksta.openactionbar.R.layout.action_bar_layout, this, true);
-        float elevation = pxFromDp(getContext(), 4);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            float elevation = pxFromDp(getContext(), 4);
             setElevation(elevation);
         }
     }
