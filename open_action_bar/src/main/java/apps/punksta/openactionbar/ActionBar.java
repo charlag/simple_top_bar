@@ -257,7 +257,7 @@ public class ActionBar extends RelativeLayout implements
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(getContext(), "onClick"+v.getId(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(getContext(), "onClick"+v.getId(), Toast.LENGTH_LONG).show();
         Action action = (Action) v.getTag();
         if (listener != null && action != null) {
             listener.onClick(v, action);

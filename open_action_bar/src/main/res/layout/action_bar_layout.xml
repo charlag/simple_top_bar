@@ -8,12 +8,13 @@
     <ImageView
         android:id="@+id/action_bar_menu"
         android:src="@drawable/ic_menu_black_24dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/actionBarHeight"
+        android:layout_height="@dimen/actionBarHeight"
+        android:scaleType="centerInside"
         android:visibility="visible"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/horizontal_margin"
-        />
+        android:background="?android:attr/selectableItemBackground"
+    />
 
     <LinearLayout
         android:id="@+id/action_bar_title_layout"
@@ -37,11 +38,13 @@
 
         <TextView
             android:id="@+id/action_bar_title"
-            android:text="@string/app_name"
+            android:text="@string/lib_name"
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:ellipsize="end"
+            android:lines="1"
             />
     </LinearLayout>
 
