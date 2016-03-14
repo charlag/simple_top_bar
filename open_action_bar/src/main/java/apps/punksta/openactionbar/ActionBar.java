@@ -116,7 +116,7 @@ public class ActionBar extends RelativeLayout implements
         RelativeLayout.LayoutParams params = (LayoutParams) titleLayout.getLayoutParams();
         params.leftMargin = 0;
 
-        int margin = (int) getContext().getResources().getDimension(apps.punksta.openactionbar.R.dimen.open_action_bar_horizontal_margin);
+        int margin = horisontalMargin;
         switch (gravity) {
             case left:
                 imageParams.setMarginEnd(margin);
@@ -231,8 +231,7 @@ public class ActionBar extends RelativeLayout implements
     }
 
     private void init() {
-//        int margin = (int) getContext().getResources().getDimension(apps.punksta.openactionbar.R.dimen.horizontal_margin);
-//        setPadding(margin, 0, margin, 0);
+        horisontalMargin = (int) getContext().getResources().getDimension(R.dimen.open_action_bar_horizontal_margin);
         LayoutInflater.from(getContext()).inflate(apps.punksta.openactionbar.R.layout.action_bar_layout, this, true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             float elevation = pxFromDp(getContext(), 4);

@@ -8,7 +8,7 @@ ext {
 
     libraryDescription = 'alternative actionbar'
 
-    libraryVersion = '0.21'
+    libraryVersion = '0.22'
 
     siteUrl = 'https://github.com/punksta/OpenActionBar'
     gitUrl = 'https://github.com/punksta/OpenActionBar.git'

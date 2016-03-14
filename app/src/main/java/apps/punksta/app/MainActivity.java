@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         toolbar.setActions(Arrays.asList(
-                new DrawableActon(123, R.drawable.ic_menu_black_24dp, "123"),
+                new DrawableActon(123, R.drawable.open_action_bar_menu_icon, "123"),
                 new DrawableActon(123, android.R.drawable.bottom_bar,  "123")
         ), false);
 
