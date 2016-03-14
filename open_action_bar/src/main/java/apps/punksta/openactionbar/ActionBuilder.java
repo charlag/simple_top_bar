@@ -24,7 +24,7 @@ class ActionBuilder {
             ViewGroup.LayoutParams params = v.getLayoutParams();
             if (params instanceof ViewGroup.MarginLayoutParams)
                 ((ViewGroup.MarginLayoutParams) v.getLayoutParams()).leftMargin =
-                        (int) context.getResources().getDimension(R.dimen.horizontal_margin);
+                        (int) context.getResources().getDimension(R.dimen.open_action_bar_horizontal_margin);
         }
         return result;
     }
@@ -52,8 +52,8 @@ class ActionBuilder {
     private static View fromDrawable(DrawableActon action, Context context) {
         ImageView imageView = new ImageView(context);
         imageView.setImageResource(action.getDrawable());
-        int dp24 = (int) context.getResources().getDimension(R.dimen.drawable_icon_height);
-        int marginStart = (int) context.getResources().getDimension(R.dimen.action_margin_start);
+        int dp24 = (int) context.getResources().getDimension(R.dimen.open_action_bar_icon_height);
+        int marginStart = (int) context.getResources().getDimension(R.dimen.open_action_bar_margin_start);
 
         ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(dp24, dp24);
         params.setMarginStart(marginStart);

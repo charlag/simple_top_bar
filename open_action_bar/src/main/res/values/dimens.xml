@@ -1,8 +1,8 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="actionBarHeight">56dp</dimen>
-    <dimen name="drawable_icon_height">24dp</dimen>
-    <dimen name="action_margin_start">4dp</dimen>
+    <dimen name="open_action_bar_horizontal_margin">16dp</dimen>
+    <dimen name="open_action_bar_vertical_margin">16dp</dimen>
+    <dimen name="open_action_bar_height">56dp</dimen>
+    <dimen name="open_action_bar_icon_height">24dp</dimen>
+    <dimen name="open_action_bar_margin_start">4dp</dimen>
 </resources>
