@@ -18,16 +18,13 @@ class ActionBuilder {
         List<View> result = new ArrayList<>(buttons.size());
         for (final Action barButton : buttons) {
             View v = fromAbstract(barButton, context, group);
-            ViewGroup.MarginLayoutParams params;
-            if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams)
-                params = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-            else
-                params = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            int marginStart = (int) context.getResources().getDimension(R.dimen.action_margin_start);
 
-            params.setMarginStart(marginStart);
             result.add(v);
-            group.addView(v, params);
+            group.addView(v);
+            ViewGroup.LayoutParams params = v.getLayoutParams();
+            if (params instanceof ViewGroup.MarginLayoutParams)
+                ((ViewGroup.MarginLayoutParams) v.getLayoutParams()).leftMargin =
+                        (int) context.getResources().getDimension(R.dimen.horizontal_margin);
         }
         return result;
     }

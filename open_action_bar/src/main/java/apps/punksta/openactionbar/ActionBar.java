@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -86,15 +87,22 @@ public class ActionBar extends RelativeLayout implements
     @Override
     public void setGravity(Styles.Gravity gravity) {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
         switch (gravity) {
             case left:
                 params.addRule(RelativeLayout.END_OF, apps.punksta.openactionbar.R.id.action_bar_menu);
                 params.removeRule(RelativeLayout.CENTER_HORIZONTAL);
+                params.addRule(RelativeLayout.START_OF, R.id.action_bar_actions);
+                params.width = title.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
                 break;
             case center:
                 params.removeRule(RelativeLayout.END_OF);
+                params.removeRule(RelativeLayout.START_OF);
                 params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+                params.width = title.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
+
+                int maxWidth = Math.max(actionsLayout.getWidth(), menu.getWidth());
+                params.leftMargin = params.rightMargin = maxWidth;
+
                 break;
         }
 
@@ -107,7 +115,7 @@ public class ActionBar extends RelativeLayout implements
         if (gravity == null)
             return;
         LinearLayout.LayoutParams imageParams = (LinearLayout.LayoutParams) appIcon.getLayoutParams();
-        int margin = (int) getContext().getResources().getDimension(apps.punksta.openactionbar.R.dimen.horizontal_margin);
+        int margin = (int) getContext().getResources().getDimension(R.dimen.horizontal_margin);
         switch (gravity) {
             case left:
                 imageParams.setMarginEnd(margin);
