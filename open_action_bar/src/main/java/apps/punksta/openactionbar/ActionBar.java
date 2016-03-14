@@ -36,7 +36,7 @@ public class ActionBar extends RelativeLayout implements
     private Styles.Gravity gravity;
     private Styles.ViewType viewType;
     private Action.OnActionClickListener listener;
-
+    private int horisontalMargin;
     private boolean paintDrawableActionsToTitleColor;
 
     {
@@ -115,10 +115,16 @@ public class ActionBar extends RelativeLayout implements
         if (gravity == null)
             return;
         LinearLayout.LayoutParams imageParams = (LinearLayout.LayoutParams) appIcon.getLayoutParams();
-        int margin = (int) getContext().getResources().getDimension(R.dimen.horizontal_margin);
+        RelativeLayout.LayoutParams params = (LayoutParams) titleLayout.getLayoutParams();
+        params.leftMargin = 0;
+
+        int margin = (int) getContext().getResources().getDimension(apps.punksta.openactionbar.R.dimen.horizontal_margin);
         switch (gravity) {
             case left:
                 imageParams.setMarginEnd(margin);
+                if (menu.getVisibility() == GONE) {
+                    params.leftMargin = horisontalMargin;
+                }
                 break;
             case center:
                 if (title.getVisibility() == GONE)
@@ -127,6 +133,7 @@ public class ActionBar extends RelativeLayout implements
                     imageParams.setMarginEnd(margin);
         }
         appIcon.setLayoutParams(imageParams);
+        titleLayout.setLayoutParams(params);
     }
 
     public void setViewType(Styles.ViewType viewType) {
@@ -233,6 +240,7 @@ public class ActionBar extends RelativeLayout implements
         float elevation = pxFromDp(getContext(), 4);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            float elevation = pxFromDp(getContext(), 4);
             setElevation(elevation);
         }
     }

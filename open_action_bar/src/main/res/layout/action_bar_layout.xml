@@ -12,6 +12,7 @@
         android:layout_height="@dimen/actionBarHeight"
         android:scaleType="centerInside"
         android:visibility="visible"
+        android:clickable="true"
         android:layout_centerVertical="true"
         android:background="?android:attr/selectableItemBackground"
 
@@ -39,7 +40,7 @@
 
         <TextView
             android:id="@+id/action_bar_title"
-            android:text="@string/lib_name"
+            android:text="dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
             android:textSize="18sp"
 
             android:layout_width="match_parent"
@@ -51,6 +52,7 @@
 
 
     <LinearLayout
+        android:layout_marginRight="@dimen/horizontal_margin"
         android:id="@+id/action_bar_actions"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
