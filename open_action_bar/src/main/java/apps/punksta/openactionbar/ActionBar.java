@@ -237,8 +237,6 @@ public class ActionBar extends RelativeLayout implements
         setPadding(margin, 0, margin, 0);
 
         LayoutInflater.from(getContext()).inflate(apps.punksta.openactionbar.R.layout.action_bar_layout, this, true);
-        float elevation = pxFromDp(getContext(), 4);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             float elevation = pxFromDp(getContext(), 4);
             setElevation(elevation);
