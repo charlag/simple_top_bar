@@ -1,6 +1,7 @@
 # SimpleTopBar
 alternative to action bar with a simple changing of title, logo, action buttons.
 
+![alt Examples](https://github.com/punksta/simple_top_bar/blob/master/example.png examples)
 
 Public funstions placed in an interface
 ```
