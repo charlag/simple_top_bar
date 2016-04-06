@@ -8,6 +8,7 @@ You can:
 
 ![alt Examples](https://github.com/punksta/simple_top_bar/blob/master/example.png "examples")
 
+## Usage
 Public funstions placed in an interface
 ```
 public interface IActionBar {
@@ -109,3 +110,11 @@ public class Styles {
     }
 }
 ```
+
+# Download
+maven {
+    url "https://oss.sonatype.org/content/repositories/snapshots"
+}
+compile 'apps.punksta.openactionbar:open_action_bar:0.3'
+
+
