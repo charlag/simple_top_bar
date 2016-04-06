@@ -112,9 +112,11 @@ public class Styles {
 ```
 
 # Download
+```
 maven {
     url "https://oss.sonatype.org/content/repositories/snapshots"
 }
-compile 'apps.punksta.openactionbar:open_action_bar:0.3'
 
+compile 'apps.punksta.openactionbar:open_action_bar:0.3'
+```
 
