@@ -4,7 +4,7 @@ package apps.punksta.openactionbar;
  * Created by punksta on 13.01.16.
  */
 public class Styles {
-    public enum Gravity {
+    public enum TitleGravity {
         left, center
     }
 

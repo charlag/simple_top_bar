@@ -2,6 +2,7 @@ package apps.punksta.openactionbar;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * Created by punksta on 13.01.16.
  */
-public class ActionBar extends RelativeLayout implements
+public class SimpleTopBar extends RelativeLayout implements
         IActionBar,
         View.OnClickListener {
     private final ImageView menu;
@@ -31,11 +32,14 @@ public class ActionBar extends RelativeLayout implements
     private final LinearLayout titleLayout;
     private final List<View> actions;
 
-    private Styles.Gravity gravity;
+    private Styles.TitleGravity titleGravity;
     private Styles.ViewType viewType;
     private Action.OnActionClickListener listener;
     private int horisontalMargin;
     private boolean paintDrawableActionsToTitleColor;
+
+    private int maxIconWidth;
+    private int maxIconWidthWithoutTitle;
 
     {
         actions = new ArrayList<>();
@@ -45,18 +49,34 @@ public class ActionBar extends RelativeLayout implements
     private void parseAtr(AttributeSet set, int defStyleAttr) {
         TypedArray a = getContext().getTheme().obtainStyledAttributes(
                 set,
-                apps.punksta.openactionbar.R.styleable.ActionBar,
+                apps.punksta.openactionbar.R.styleable.SimpleTopBar,
                 defStyleAttr,
                 0);
         try {
-            int viewNum = a.getInteger(apps.punksta.openactionbar.R.styleable.ActionBar_ui_mode, 2);
-            int gravityNum = a.getInteger(apps.punksta.openactionbar.R.styleable.ActionBar_title_gravity, 0);
+            int viewNum = a.getInteger(apps.punksta.openactionbar.R.styleable.SimpleTopBar_ui_mode, 2);
+            int gravityNum = a.getInteger(apps.punksta.openactionbar.R.styleable.SimpleTopBar_title_gravity, 0);
 
             Styles.ViewType viewType = Styles.ViewType.values()[viewNum];
-            Styles.Gravity gravity = Styles.Gravity.values()[gravityNum];
+            Styles.TitleGravity titleGravity = Styles.TitleGravity.values()[gravityNum];
 
-            setGravity(gravity);
+            setTitleGravity(titleGravity);
             setViewType(viewType);
+
+            int logoRes = a.getResourceId(R.styleable.SimpleTopBar_logo_res, 0);
+            int menuColor = a.getColor(R.styleable.SimpleTopBar_menu_color, Color.BLACK);
+            int titleColor = a.getColor(R.styleable.SimpleTopBar_menu_color, Color.BLACK);
+
+            if (logoRes != 0)
+                appIcon.setImageResource(logoRes);
+
+            menu.setColorFilter(menuColor, PorterDuff.Mode.SRC_ATOP);
+            title.setTextColor(titleColor);
+
+            String titleStr = a.getString(R.styleable.SimpleTopBar_title_text);
+
+            if (titleStr != null)
+                title.setText(titleStr);
+
         } finally {
             a.recycle();
         }
@@ -83,9 +103,9 @@ public class ActionBar extends RelativeLayout implements
     }
 
     @Override
-    public void setGravity(Styles.Gravity gravity) {
+    public void setTitleGravity(Styles.TitleGravity titleGravity) {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        switch (gravity) {
+        switch (titleGravity) {
             case left:
                 params.addRule(RelativeLayout.END_OF, apps.punksta.openactionbar.R.id.action_bar_menu);
                 params.removeRule(RelativeLayout.CENTER_HORIZONTAL);
@@ -105,19 +125,19 @@ public class ActionBar extends RelativeLayout implements
         }
 
         titleLayout.setLayoutParams(params);
-        this.gravity = gravity;
+        this.titleGravity = titleGravity;
         updateMargins();
     }
 
     void updateMargins() {
-        if (gravity == null)
+        if (titleGravity == null)
             return;
         LinearLayout.LayoutParams imageParams = (LinearLayout.LayoutParams) appIcon.getLayoutParams();
         RelativeLayout.LayoutParams params = (LayoutParams) titleLayout.getLayoutParams();
         params.leftMargin = 0;
 
         int margin = horisontalMargin;
-        switch (gravity) {
+        switch (titleGravity) {
             case left:
                 imageParams.setMarginEnd(margin);
                 if (menu.getVisibility() == GONE) {
@@ -167,6 +187,11 @@ public class ActionBar extends RelativeLayout implements
                 title.setVisibility(VISIBLE);
                 break;
         }
+        if (appIcon.getVisibility() == VISIBLE && title.getVisibility() == VISIBLE) {
+            appIcon.getLayoutParams().width = (maxIconWidth);
+        } else {
+            appIcon.getLayoutParams().width = (maxIconWidthWithoutTitle);
+        }
         this.viewType = viewType;
         updateMargins();
     }
@@ -196,7 +221,7 @@ public class ActionBar extends RelativeLayout implements
         super.setBackgroundColor(color);
     }
 
-    public ActionBar(Context context) {
+    public SimpleTopBar(Context context) {
         super(context);
         init();
         menu = (ImageView) findViewById(apps.punksta.openactionbar.R.id.action_bar_menu);
@@ -206,7 +231,7 @@ public class ActionBar extends RelativeLayout implements
         titleLayout = (LinearLayout) findViewById(apps.punksta.openactionbar.R.id.action_bar_title_layout);
     }
 
-    public ActionBar(Context context, AttributeSet attrs) {
+    public SimpleTopBar(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
         menu = (ImageView) findViewById(apps.punksta.openactionbar.R.id.action_bar_menu);
@@ -218,7 +243,7 @@ public class ActionBar extends RelativeLayout implements
         parseAtr(attrs, 0);
     }
 
-    public ActionBar(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SimpleTopBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
         menu = (ImageView) findViewById(apps.punksta.openactionbar.R.id.action_bar_menu);
@@ -232,6 +257,10 @@ public class ActionBar extends RelativeLayout implements
 
     private void init() {
         horisontalMargin = (int) getContext().getResources().getDimension(R.dimen.open_action_bar_horizontal_margin);
+        maxIconWidth = (int) getContext().getResources().getDimension(R.dimen.open_action_bar_image_max_width);
+        maxIconWidthWithoutTitle = (int) getContext().getResources().getDimension(R.dimen.open_action_bar_image_max_width_without_title);
+
+
         LayoutInflater.from(getContext()).inflate(apps.punksta.openactionbar.R.layout.action_bar_layout, this, true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             float elevation = pxFromDp(getContext(), 4);
@@ -263,6 +292,16 @@ public class ActionBar extends RelativeLayout implements
                return view;
        }
         throw new IllegalArgumentException(action + " is not added to actions");
+    }
+
+    @Override
+    public Styles.ViewType getViewType() {
+        return viewType;
+    }
+
+    @Override
+    public Styles.TitleGravity getTitleGravity() {
+        return titleGravity;
     }
 
     @Override

@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context="apps.punksta.app.MainActivity">
 
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <FrameLayout
+        <apps.punksta.openactionbar.SimpleTopBar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-                <apps.punksta.openactionbar.ActionBar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorPrimaryDark"
-                />
-            <View
-                android:id="@+id/action_bar_center"
-                android:layout_width="1dp"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_gravity="center_horizontal"
-                android:background="@android:color/black"
-                />
-        </FrameLayout>
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimaryDark"
+            app:logo_res="@android:drawable/ic_dialog_info"
+            app:title_gravity="left"
+            app:ui_mode="menuIconTitle"
+            app:menu_color="@color/white"
+            app:title_color="@color/white"
+            app:title_text="left menuIconTitle"/>
 
-    <include layout="@layout/content_main" />
+        <View
+            android:id="@+id/action_bar_center"
+            android:layout_width="1dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/black" />
+    </FrameLayout>
+
+
+
+    <include layout="@layout/content_main"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        />
 
 
 </LinearLayout>

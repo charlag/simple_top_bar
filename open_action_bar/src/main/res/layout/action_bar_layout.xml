@@ -36,6 +36,8 @@
             android:layout_height="wrap_content"
             android:visibility="visible"
             android:layout_marginEnd="@dimen/open_action_bar_horizontal_margin"
+            android:maxWidth="@dimen/open_action_bar_image_max_width"
+            android:maxHeight="@dimen/open_action_bar_image_max_height"
             />
 
         <TextView

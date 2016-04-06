@@ -21,9 +21,13 @@ public interface IActionBar {
     void setTitleColor(int color);
     void setBackgroundColor(int color);
 
-    void setGravity(Styles.Gravity gravity);
+    void setTitleGravity(Styles.TitleGravity titleGravity);
     void setViewType(Styles.ViewType viewType);
     void setActions(List<? extends Action> button, boolean sameColorWithTitle);
 
     View getView(Action action);
+
+    Styles.ViewType getViewType();
+    Styles.TitleGravity getTitleGravity();
+
 }

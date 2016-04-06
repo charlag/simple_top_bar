@@ -12,25 +12,26 @@ import apps.punksta.openactionbar.IActionBar;
 import apps.punksta.openactionbar.Styles;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Styles.Gravity gravity = Styles.Gravity.center;
-    private Styles.ViewType viewType = Styles.ViewType.icon;
+    private Styles.TitleGravity titleGravity;
+    private Styles.ViewType viewType;
     private TextView status;
     IActionBar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (IActionBar) findViewById(R.id.toolbar);
-        toolbar.setViewType(viewType);
-        toolbar.setGravity(gravity);
 
         toolbar.getTitle().setText("test");
 
-
         toolbar.setActions(Arrays.asList(
                 new DrawableActon(123, R.drawable.open_action_bar_menu_icon, "123"),
-                new DrawableActon(123, android.R.drawable.bottom_bar,  "123")
+                new DrawableActon(123, android.R.drawable.bottom_bar, "123")
         ), false);
+
+        titleGravity = toolbar.getTitleGravity();
+        viewType = toolbar.getViewType();
 
         findViewById(R.id.changeGravity).setOnClickListener(this);
         findViewById(R.id.changeViewType).setOnClickListener(this);
@@ -46,15 +47,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void updateStatus() {
-        status.setText(gravity.toString() + " " + viewType.toString());
+        status.setText(titleGravity.toString() + " " + viewType.toString());
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.changeGravity:
-                gravity = getNext(gravity);
-                toolbar.setGravity(gravity);
+                titleGravity = getNext(titleGravity);
+                toolbar.setTitleGravity(titleGravity);
                 break;
             case R.id.changeViewType:
                 viewType = getNext(viewType);
