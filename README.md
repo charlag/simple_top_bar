@@ -1,7 +1,12 @@
 # SimpleTopBar
 alternative to action bar with a simple changing of title, logo, action buttons.
 
-![alt Examples](https://github.com/punksta/simple_top_bar/blob/master/example.png examples)
+You can:
+1. get links for all object of action bar
+2. seting image, title or both to the center of action bar
+3. use view attr or java code
+
+![alt Examples](https://github.com/punksta/simple_top_bar/blob/master/example.png "examples")
 
 Public funstions placed in an interface
 ```
