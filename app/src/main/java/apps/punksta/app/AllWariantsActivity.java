@@ -49,19 +49,16 @@ public class AllWariantsActivity extends AppCompatActivity {
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
         Action actions[][] = new Action[][]{
-//                new Action[0],
-                new Action[]{
-                        new DrawableActon(1, android.R.drawable.btn_plus, "info")
-                }
+                new Action[0],
+//                new Action[]{
+//                        new DrawableActon(1, android.R.drawable.btn_plus, "info")
+//                }
         };
 
         for (Styles.ViewType viewType : new Styles.ViewType[]{Styles.ViewType.icon, Styles.ViewType.menuIcon, Styles.ViewType.title, Styles.ViewType.iconTitle, Styles.ViewType.menuTitle, Styles.ViewType.menuIconTitle})
             for (Styles.TitleGravity titleGravity : Styles.TitleGravity.values())
                 for (Action[] actionList : actions) {
                     SimpleTopBar simpleTopBar = new SimpleTopBar(this);
-
-                    int colorTitle = getColorTitle();
-
                     simpleTopBar.setTitleColor(getColorTitle());
                     simpleTopBar.setBackgroundColor(getBackgroundColor());
                     simpleTopBar.setActions(Arrays.asList(actionList), false);

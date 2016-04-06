@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SimpleActionBar.iml" filepath="$PROJECT_DIR$/SimpleActionBar.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/open_action_bar/open_action_bar.iml" filepath="$PROJECT_DIR$/open_action_bar/open_action_bar.iml" />
       <module fileurl="file://$PROJECT_DIR$/open_action_bar/open_action_bar.iml" filepath="$PROJECT_DIR$/open_action_bar/open_action_bar.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/simple_top_bar.iml" filepath="$PROJECT_DIR$/.idea/simple_top_bar.iml" />
       <module fileurl="file://$PROJECT_DIR$/simple_top_bar.iml" filepath="$PROJECT_DIR$/simple_top_bar.iml" />
