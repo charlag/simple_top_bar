@@ -50,18 +50,6 @@ public interface IActionBar {
     void setBackgroundColor(int color);
 
     /**
-     * Set title and app logo gravity. Can be placed on left or center of action bar
-     * @param titleGravity
-     */
-    void setTitleGravity(Styles.TitleGravity titleGravity);
-
-    /**
-     * Set view type. Changes of visibility of app logo, title, menu
-     * @param viewType
-     */
-    void setViewType(Styles.ViewType viewType);
-
-    /**
      * Set up action buttons
      * @param actionButtons buttons
      * @param sameColorWithTitle accept color filter to drawables
@@ -71,7 +59,7 @@ public interface IActionBar {
     /**
      * Returns view of action
      * @param action
-     * @return @Nullable view with action
+     * @return Nullable view with action
      */
     View getView(Action action);
 
@@ -82,9 +70,21 @@ public interface IActionBar {
     Styles.ViewType getViewType();
 
     /**
+     * Set view type. Changes of visibility of app logo, title, menu
+     * @param viewType
+     */
+    void setViewType(Styles.ViewType viewType);
+
+    /**
      * Returns current titleGravity
      * @return titleGravity
      */
     Styles.TitleGravity getTitleGravity();
+
+    /**
+     * Set title and app logo gravity. Can be placed on left or center of action bar
+     * @param titleGravity
+     */
+    void setTitleGravity(Styles.TitleGravity titleGravity);
 
 }

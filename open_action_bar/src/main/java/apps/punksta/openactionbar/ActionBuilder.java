@@ -14,6 +14,18 @@ import java.util.List;
  * Created by punksta on 15.01.16.
  */
 class ActionBuilder {
+    private static final View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+            Action action = (Action) v.getTag();
+            if (action != null) {
+                Toast.makeText(v.getContext(), action.getName(), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            return false;
+        }
+    };
+
     public static List<View> fillLayout(final Context context, List<? extends Action> buttons, ViewGroup group) {
         List<View> result = new ArrayList<>(buttons.size());
         for (final Action barButton : buttons) {
@@ -22,9 +34,6 @@ class ActionBuilder {
             result.add(v);
             group.addView(v);
             ViewGroup.LayoutParams params = v.getLayoutParams();
-            if (params instanceof ViewGroup.MarginLayoutParams)
-                ((ViewGroup.MarginLayoutParams) v.getLayoutParams()).leftMargin =
-                        (int) context.getResources().getDimension(R.dimen.open_action_bar_horizontal_margin);
         }
         return result;
     }
@@ -44,7 +53,6 @@ class ActionBuilder {
         return view;
     }
 
-
     private static View fromCustom(CustomViewAction action, Context context,  ViewGroup group) {
         return LayoutInflater.from(context).inflate(action.getViewRes(), group, false);
     }
@@ -52,24 +60,11 @@ class ActionBuilder {
     private static View fromDrawable(DrawableActon action, Context context) {
         ImageView imageView = new ImageView(context);
         imageView.setImageResource(action.getDrawable());
-        int dp24 = (int) context.getResources().getDimension(R.dimen.open_action_bar_icon_height);
-        int marginStart = (int) context.getResources().getDimension(R.dimen.open_action_bar_margin_start);
-
-        ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(dp24, dp24);
-        params.setMarginStart(marginStart);
+        int size = (int) context.getResources().getDimension(R.dimen.open_action_bar_action_button_size);
+        int padding = (int) context.getResources().getDimension(R.dimen.open_action_bar_action_button_padding);
+        imageView.setPadding(padding, padding, padding, padding);
+        ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(size, size);
         imageView.setLayoutParams(params);
         return imageView;
     }
-
-    private static final View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View v) {
-            Action action = (Action) v.getTag();
-            if (action != null) {
-                Toast.makeText(v.getContext(), action.getName(), Toast.LENGTH_SHORT).show();
-                return true;
-            }
-            return false;
-        }
-    };
 }

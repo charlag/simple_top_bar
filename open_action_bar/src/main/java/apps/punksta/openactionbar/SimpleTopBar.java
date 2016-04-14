@@ -114,7 +114,6 @@ public class SimpleTopBar extends RelativeLayout implements
 
             if (titleStr != null)
                 title.setText(titleStr);
-
         } finally {
             a.recycle();
         }
